@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索导航</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+</head>
+<body>
+<h1>搜索导航</h1>
+<form id="searchForm">
+    <label for="searchQuery">内容:</label>
+    <input type="text" id="searchQuery" name="searchQuery">
+    <label for="searchCategory">分类:</label>
+    <select id="searchCategory" name="searchCategory">
+        <option value="pan">网盘</option>
+        <option value="search">搜索引擎</option>
+        <option value="translate">翻译</option>
+        <option value="programming">编程</option>
+        <option value="video">视频</option>
+        <option value="anime">动漫</option>
+        <option value="software">软件</option>
+    </select>
+    <label for="searchEngine">网站：</label>
+    <select id="searchEngine" name="searchEngine" multiple>
+        <!-- Options will be dynamically populated based on selected category -->
+    </select>
+    <button type="submit">搜索</button>
+</form>
+
+<script>
+    document.getElementById("searchCategory").addEventListener("change", function() {
+        const category = this.value;
+        const searchEngineSelect = document.getElementById("searchEngine");
+        searchEngineSelect.innerHTML = ""; // Clear previous options
+
+        const searchEngines = {
+            "pan": [
+                {name: "皮卡搜", url: "https://www.pikaso.top/search/?pan=all&type=folder&q=%s"},
+                {name: "小云搜", url: "https://www.yunso.net/index/user/s?wd=%s"},
+                {name: "兄弟盘", url: "https://xiongdipan.com/search?k=%s"}
+            ],
+            "search": [
+                {name: "百度", url: "https://www.baidu.com/s?wd=%s"},
+                {name: "必应", url: "https://www.bing.com/search?q=%s&PC=U316&FORM=CHROMN"},
+                {name: "谷歌", url: "https://www.google.com/search?q=%s"}
+            ],
+            "translate": [
+                {name: "谷歌", url: "https://translate.google.com/?sl=auto&tl=en&text=%s&op=translate"},
+                {name: "有道", url: "https://www.youdao.com/result?word=%s&lang=en"}
+            ],
+            "programming": [
+                {name: "GitHub", url: "https://github.com/search?q=%s"},
+                {name: "CSDN", url: "https://so.csdn.net/so/search?q=%s"}
+            ],
+            "video": [
+                {name: "b站", url: "https://search.bilibili.com/all?keyword=%s"},
+                {name: "抖音", url: "https://www.douyin.com/search/%s"},
+                {name: "Youtube", url: "https://www.youtube.com/results?search_query=%s"},
+                {name: "小雅", url: "https://119.91.23.137:8080/search?box=%s&url=&type=video"}
+            ],
+            "anime": [
+                {name: "包子漫画", url: "https://www.baozimh.com/search?q=%s"},
+                {name: "风车动漫", url: "https://www.dmla5.com/search/-------------.html?wd=%s"}
+            ],
+            "software": [
+                {name: "APKCombo", url: "https://apkcombo.com/zh/search/%s#gsc.tab=0&gsc.q=123&gsc.sort="},
+                {name: "Scoop", url: "https://scoop.sh/#/apps?q=%s&o=false"},
+                {name: "maven", url: "https://central.sonatype.com/search?q=%s"}
+            ]
+        };
+
+        searchEngines[category].forEach(function(engine) {
+            const option = document.createElement("option");
+            option.value = engine.url;
+            option.text = engine.name;
+            searchEngineSelect.appendChild(option);
+        });
+    });
+
+    document.getElementById("searchForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // 阻止表单提交
+
+        const searchQuery = document.getElementById("searchQuery").value;
+        const selectedEngines = Array.from(document.getElementById("searchEngine").selectedOptions).map(option => option.value);
+
+        // 在新标签页中打开选定搜索引擎的搜索结果页面
+        selectedEngines.forEach(function(engine) {
+            window.open(engine.replace("%s", encodeURIComponent(searchQuery)) , "_blank");
+        });
+    });
+
+    // Populate search engine options on page load
+    document.getElementById("searchCategory").dispatchEvent(new Event("change"));
+</script>
+</body>
+</html>
