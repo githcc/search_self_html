@@ -1,8 +1,17 @@
 ## 编写html页面
 https://chat.openai.com/share/6fb184b9-b4c3-410e-8ede-1fe4315bdaa1
 
-## 添加相关的搜索
+## 添加相关的搜索网站
 https://chat.openai.com/share/6c8a2ca9-e1f1-48ec-8986-99c70740ec8b
+
+## 将网站改用vue
+https://chat.openai.com/share/90136ef3-490d-4f90-802a-a227cf3a4f66
+
+## 添加联想词
+https://chat.openai.com/share/560c5dc7-aa97-49e3-9f02-df73210f1bc8
+
+## 优化页面
+https://chat.openai.com/share/0962505f-6f0d-40e5-9f2d-e7fbdc66741d
 
 ## 细分领域
 ### 网盘
@@ -38,9 +47,14 @@ https://chat.openai.com/share/6c8a2ca9-e1f1-48ec-8986-99c70740ec8b
 2. [scoop](https://scoop.sh/#/apps?q=%s&o=false)
 3. [maven](https://central.sonatype.com/search?q=%s)
 
+## 联想词接口
+1. [百度](https://suggestion.baidu.com/su?wd=%s)
+
 ## 其它
 1. 分页功能不可用
+2. 联想词没有显示在页面
 
 ## 参考资料
 1. [chatgpt](https://chat.openai.com)
 2. [图欧学习导航](https://tuostudy.upnb.top/)
+3. [常用的搜索联想API及使用方法](https://blog.csdn.net/u012925833/article/details/84950750)
