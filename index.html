@@ -105,8 +105,8 @@
             <option v-for="(engine, index) in searchEngines[selectedCategory]" :value="engine.url" :key="index">{{ engine.name }}</option>
         </select>
         <label for="searchQuery">内容:</label>
-        <input type="text" id="searchQuery" v-model="searchQuery" @input="getSuggestions">
-        <ul v-if="suggestions.length > 0" class="suggestions">
+        <input type="text" id="searchQuery" v-model="searchQuery" @input="getSuggestions" autocomplete="off">
+        <ul v-if="suggestions.length > 0" class="suggestions" id="suggestionsUl" @mouseleave="startTimer" @mouseenter="clearTimer">
             <li class="suggestion-item" v-for="(suggestion, index) in suggestions" :key="index" @click="selectSuggestion(suggestion)">{{ suggestion }}</li>
         </ul>
         <button type="submit">搜索</button>
@@ -122,38 +122,37 @@
             selectedCategory: 'pan',
             selectedEngines: [],
             categories: [
-                { label: '网盘', value: 'pan' },
-                { label: '搜索引擎', value: 'search' },
-                { label: '翻译', value: 'translate' },
-                { label: '编程', value: 'programming' },
-                { label: '视频', value: 'video' },
-                { label: '动漫', value: 'anime' },
-                { label: '软件', value: 'software' }
+                {label: '网盘', value: 'pan'},
+                {label: '编程', value: 'programming'},
+                {label: '翻译', value: 'translate'},
+                {label: '视频', value: 'video'},
+                {label: '动漫', value: 'anime'},
+                {label: '软件', value: 'software'},
+                {label: 'AI搜索', value: 'AISearch'},
+                {label: '吃喝玩乐', value: 'other'},
+                {label: '搜索引擎', value: 'search'}
             ],
             searchEngines: {
                 "pan": [
                     {name: "皮卡搜", url: "https://www.pikaso.top/search/?pan=all&type=folder&q=%s"},
                     {name: "小云搜", url: "https://www.yunso.net/index/user/s?wd=%s"},
-                    {name: "兄弟盘", url: "https://xiongdipan.com/search?k=%s"}
-                ],
-                "search": [
-                    {name: "百度", url: "https://www.baidu.com/s?wd=%s"},
-                    {name: "必应", url: "https://www.bing.com/search?q=%s&PC=U316&FORM=CHROMN"},
-                    {name: "谷歌", url: "https://www.google.com/search?q=%s"}
-                ],
-                "translate": [
-                    {name: "谷歌", url: "https://translate.google.com/?sl=auto&tl=en&text=%s&op=translate"},
-                    {name: "有道", url: "https://www.youdao.com/result?word=%s&lang=en"}
+                    {name: "兄弟盘", url: "https://xiongdipan.com/search?k=%s"},
+                    {name: "猫狸盘搜", url: "https://www.alipansou.com/search?k=%s"}
                 ],
                 "programming": [
                     {name: "GitHub", url: "https://github.com/search?q=%s"},
                     {name: "CSDN", url: "https://so.csdn.net/so/search?q=%s"}
                 ],
+                "translate": [
+                    {name: "谷歌", url: "https://translate.google.com/?sl=auto&tl=en&text=%s&op=translate"},
+                    {name: "有道", url: "https://www.youdao.com/result?word=%s&lang=en"}
+                ],
                 "video": [
                     {name: "b站", url: "https://search.bilibili.com/all?keyword=%s"},
                     {name: "抖音", url: "https://www.douyin.com/search/%s"},
                     {name: "Youtube", url: "https://www.youtube.com/results?search_query=%s"},
-                    {name: "小雅", url: "https://119.91.23.137:8080/search?box=%s&url=&type=video"}
+                    {name: "小雅", url: "https://119.91.23.137:8080/search?box=%s&url=&type=video"},
+                    {name: "豆瓣", url: "https://www.douban.com/search?q=%s"}
                 ],
                 "anime": [
                     {name: "包子漫画", url: "https://www.baozimh.com/search?q=%s"},
@@ -163,6 +162,19 @@
                     {name: "APKCombo", url: "https://apkcombo.com/zh/search/%s#gsc.tab=0&gsc.q=123&gsc.sort="},
                     {name: "Scoop", url: "https://scoop.sh/#/apps?q=%s&o=false"},
                     {name: "maven", url: "https://central.sonatype.com/search?q=%s"}
+                ],
+                "AISearch": [
+                    {name: "秘塔AI搜索", url: "https://metaso.cn/?q=%s"}
+                ],
+                "other": [
+                    {name: "大众点评", url: "https://www.dianping.com/search/keyword/4/0_%s"},
+                    {name: "小红书", url: "https://www.xiaohongshu.com/search_result?keyword=%s"},
+                    {name: "抖音", url: "https://www.douyin.com/search/%s"}
+                ],
+                "search": [
+                    {name: "百度", url: "https://www.baidu.com/s?wd=%s"},
+                    {name: "必应", url: "https://www.bing.com/search?q=%s&PC=U316&FORM=CHROMN"},
+                    {name: "谷歌", url: "https://www.google.com/search?q=%s"}
                 ]
             },
             suggestions: []
@@ -174,8 +186,8 @@
             search() {
                 const searchQuery = this.searchQuery;
                 const selectedEngines = this.selectedEngines;
-                selectedEngines.forEach(function(engine) {
-                    window.open(engine.replace("%s", encodeURIComponent(searchQuery)) , "_blank");
+                selectedEngines.forEach(function (engine) {
+                    window.open(engine.replace("%s", encodeURIComponent(searchQuery)), "_blank");
                 });
             },
             getSuggestions() {
@@ -186,12 +198,25 @@
                     script.src = apiUrl;
                     document.body.appendChild(script);
                 } else {
-                    this.suggestions =[];
+                    this.suggestions = [];
                 }
+                this.clearTimer();
+                this.startTimer();
             },
             selectSuggestion(suggestion) {
                 this.searchQuery = suggestion;
                 this.suggestions = [];
+            },
+            startTimer() {
+                this.timer = setTimeout(() => {
+                    this.hideDiv();
+                }, 3000);
+            },
+            clearTimer() {
+                clearTimeout(this.timer);
+            },
+            hideDiv() {
+                document.getElementById('suggestionsUl').style.display = 'none';
             }
         }
     });
