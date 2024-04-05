@@ -16,7 +16,7 @@
             text-align: center;
         }
 
-        option{
+        option {
             padding: 3px;
         }
 
@@ -95,7 +95,7 @@
             background-color: #f0f0f0;
         }
 
-        #searchEngine{
+        #searchEngine {
             height: 200px;
         }
     </style>
@@ -145,6 +145,7 @@
                 {label: '软件', value: 'software'},
                 {label: '指数', value: 'index'},
                 {label: '壁纸', value: 'picture'},
+                {label: '工具', value: 'tools'},
                 {label: '行业标准', value: 'standards'},
                 {label: '吃喝玩乐', value: 'lifestyle'},
                 {label: '搜索引擎', value: 'search'}
@@ -180,7 +181,8 @@
                 ],
                 "software": [
                     {name: "APKCombo", url: "https://apkcombo.com/zh/search/%s#gsc.tab=0&gsc.q=123&gsc.sort="},
-                    {name: "Scoop", url: "https://scoop.sh/#/apps?q=%s&o=false"}
+                    {name: "Scoop", url: "https://scoop.sh/#/apps?q=%s&o=false"},
+                    {name: "油猴", url: "https://greasyfork.org/zh-CN/scripts?q=%s"}
                 ],
                 "lifestyle": [
                     {name: "大众点评", url: "https://www.dianping.com/search/keyword/4/0_%s"},
@@ -189,13 +191,9 @@
                 ],
                 "index": [
                     {name: "百度指数", url: "https://index.baidu.com/v2/main/index.html#/trend/%s?words=%s"},
-                    {
-                        name: "巨量算数",
-                        url: "https://trendinsight.oceanengine.com/arithmetic-index/analysis?keyword=%s&appName=aweme"
-                    },
+                    {name: "巨量算数",url: "https://trendinsight.oceanengine.com/arithmetic-index/analysis?keyword=%s&appName=aweme"},
                     {name: "谷歌趋势", url: "https://trends.google.com/trends/explore?q=%s"},
-                    {name: "360趋势", url: "https://trends.so.com/result?query=%s"},
-                    {name: "艺恩娱数", url: "https://ys.endata.cn/DataMarket/Search?key=%s"}
+                    {name: "360趋势", url: "https://trends.so.com/result?query=%s"}
                 ],
                 "picture": [
                     {name: "pexels", url: "https://www.pexels.com/search/%s/"},
@@ -205,12 +203,16 @@
                     {name: "wallpaperswide", url: "https://wallpaperswide.com/search.html?q=%s"},
                     {name: "unsplash", url: "https://unsplash.com/s/photos/%s"}
                 ],
+                "tools": [
+                    {name: "在线工具", url: "https://tool.lu/search/?q=%s"},
+                    {name: "菜鸟工具", url: "https://www.jyshare.com/index.php?s=%s"},
+                    {name: "个工具箱", url: "http://www.atoolbox.net/Search.php?Keyword=%s"},
+                    {name: "工具匠", url: "https://toolkk.com/search?keyword=%s"},
+                    {name: "爱资料工具", url: "https://www.toolnb.com/Home/Search/index.html?search=%s"}
+                ],
                 "standards": [
                     {name: "全国标准信息公共服务平台", url: "https://std.samr.gov.cn/search/std?q=%s"},
-                    {
-                        name: "食品伙伴网",
-                        url: "http://down.foodmate.net/standard/search.php?corpstandard=2&fields=0&kw=%s"
-                    },
+                    {name: "食品伙伴网",url: "http://down.foodmate.net/standard/search.php?corpstandard=2&fields=0&kw=%s"},
                     {name: "中国标准服务网", url: "https://www.cssn.net.cn/cssn/list?keyword=%s"},
                     {name: "标准信息服务网", url: "https://www.sacinfo.cn/s/std?p.p2=%s"}
                 ],
@@ -218,7 +220,7 @@
                     {name: "百度", url: "https://www.baidu.com/s?wd=%s"},
                     {name: "必应", url: "https://www.bing.com/search?q=%s&PC=U316&FORM=CHROMN"},
                     {name: "谷歌", url: "https://www.google.com/search?q=%s"},
-                    {name: "秘塔AI搜索", url: "https://metaso.cn/?q=%s"},
+                    {name: "秘塔AI", url: "https://metaso.cn/?q=%s"},
                     {name: "ccGpt", url: "https://githcc.github.io/html_self_gpt/?q=%s"},
                 ]
             },
