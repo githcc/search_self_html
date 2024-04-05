@@ -100,12 +100,12 @@
             height: 200px;
         }
 
-        select{
+        select {
             font-size: 16px;
             padding: 5px;
         }
 
-        option{
+        option {
             font-size: 16px;
             padding: 3px;
         }
@@ -117,7 +117,7 @@
     <h1>搜索导航</h1>
     <form @submit.prevent="search">
         <label for="searchCategory">分类</label>
-        <select id="searchCategory" v-model="selectedCategory" @change="populateEngines">
+        <select id="searchCategory" v-model="selectedCategory">
             <option v-for="(category, index) in categories" :value="category.value" :key="index">{{ category.label }}
             </option>
         </select>
@@ -157,8 +157,9 @@
                 {label: '指数', value: 'index'},
                 {label: '壁纸', value: 'picture'},
                 {label: '工具', value: 'tools'},
-                {label: '行业标准', value: 'standards'},
                 {label: '吃喝玩乐', value: 'lifestyle'},
+                {label: '行业标准', value: 'standards'},
+                {label: 'AI', value: 'AISearch'},
                 {label: '搜索引擎', value: 'search'}
             ],
             searchEngines: {
@@ -202,7 +203,10 @@
                 ],
                 "index": [
                     {name: "百度指数", url: "https://index.baidu.com/v2/main/index.html#/trend/%s?words=%s"},
-                    {name: "巨量算数",url: "https://trendinsight.oceanengine.com/arithmetic-index/analysis?keyword=%s&appName=aweme"},
+                    {
+                        name: "巨量算数",
+                        url: "https://trendinsight.oceanengine.com/arithmetic-index/analysis?keyword=%s&appName=aweme"
+                    },
                     {name: "谷歌趋势", url: "https://trends.google.com/trends/explore?q=%s"},
                     {name: "360趋势", url: "https://trends.so.com/result?query=%s"}
                 ],
@@ -223,23 +227,39 @@
                 ],
                 "standards": [
                     {name: "全国标准信息公共服务平台", url: "https://std.samr.gov.cn/search/std?q=%s"},
-                    {name: "食品伙伴网",url: "http://down.foodmate.net/standard/search.php?corpstandard=2&fields=0&kw=%s"},
+                    {
+                        name: "食品伙伴网",
+                        url: "http://down.foodmate.net/standard/search.php?corpstandard=2&fields=0&kw=%s"
+                    },
                     {name: "中国标准服务网", url: "https://www.cssn.net.cn/cssn/list?keyword=%s"},
                     {name: "标准信息服务网", url: "https://www.sacinfo.cn/s/std?p.p2=%s"}
+                ],
+                "AISearch": [
+                    {name: "秘塔AI", url: "https://metaso.cn/?q=%s"},
+                    {name: "ccGpt", url: "https://githcc.github.io/html_self_gpt/?q=%s"},
                 ],
                 "search": [
                     {name: "百度", url: "https://www.baidu.com/s?wd=%s"},
                     {name: "必应", url: "https://www.bing.com/search?q=%s&PC=U316&FORM=CHROMN"},
-                    {name: "谷歌", url: "https://www.google.com/search?q=%s"},
-                    {name: "秘塔AI", url: "https://metaso.cn/?q=%s"},
-                    {name: "ccGpt", url: "https://githcc.github.io/html_self_gpt/?q=%s"},
+                    {name: "谷歌", url: "https://www.google.com/search?q=%s"}
                 ]
             },
             suggestions: []
         },
+        watch: {
+            selectedCategory() {
+                this.populateAllEngines();
+            }
+        },
+        created() {
+            this.populateAllEngines();
+        },
         methods: {
-            populateEngines() {
-                this.selectedEngines = [];
+            populateAllEngines() {
+                if (this.selectedCategory) {
+                    const engines = this.searchEngines[this.selectedCategory];
+                    this.selectedEngines = engines.map(engine => engine.url);
+                }
             },
             search() {
                 const searchQuery = this.searchQuery;
