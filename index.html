@@ -16,8 +16,12 @@
             text-align: center;
         }
 
+        option{
+            padding: 3px;
+        }
+
         form {
-            max-width: 400px;
+            max-width: 600px;
             margin: 0 auto;
             background-color: #fff;
             padding: 20px;
@@ -49,11 +53,12 @@
         button:hover {
             background-color: #45a049;
         }
-         ul {
-             list-style-type: none;
-             padding: 0;
-             margin-top: 5px;
-         }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 5px;
+        }
 
         ul li {
             background-color: #f9f9f9;
@@ -89,6 +94,10 @@
         .suggestion-item:hover {
             background-color: #f0f0f0;
         }
+
+        #searchEngine{
+            height: 200px;
+        }
     </style>
     <link rel="shortcut icon" href="img/favicon.ico"/>
 </head>
@@ -96,18 +105,24 @@
 <div id="app">
     <h1>搜索导航</h1>
     <form @submit.prevent="search">
-        <label for="searchCategory">分类:</label>
+        <label for="searchCategory">分类</label>
         <select id="searchCategory" v-model="selectedCategory" @change="populateEngines">
-            <option v-for="(category, index) in categories" :value="category.value" :key="index">{{ category.label }}</option>
+            <option v-for="(category, index) in categories" :value="category.value" :key="index">{{ category.label }}
+            </option>
         </select>
-        <label for="searchEngine">网站：</label>
+        <label for="searchEngine">网站</label>
         <select id="searchEngine" v-model="selectedEngines" multiple>
-            <option v-for="(engine, index) in searchEngines[selectedCategory]" :value="engine.url" :key="index">{{ engine.name }}</option>
+            <option v-for="(engine, index) in searchEngines[selectedCategory]" :value="engine.url" :key="index">
+                {{ engine.name }}
+            </option>
         </select>
-        <label for="searchQuery">内容:</label>
+        <label for="searchQuery">内容</label>
         <input type="text" id="searchQuery" v-model="searchQuery" @input="getSuggestions" autocomplete="off">
-        <ul v-if="suggestions.length > 0" class="suggestions" id="suggestionsUl" @mouseleave="startTimer" @mouseenter="clearTimer">
-            <li class="suggestion-item" v-for="(suggestion, index) in suggestions" :key="index" @click="selectSuggestion(suggestion)">{{ suggestion }}</li>
+        <ul v-if="suggestions.length > 0" class="suggestions" id="suggestionsUl" @mouseleave="startTimer"
+            @mouseenter="clearTimer">
+            <li class="suggestion-item" v-for="(suggestion, index) in suggestions" :key="index"
+                @click="selectSuggestion(suggestion)">{{ suggestion }}
+            </li>
         </ul>
         <button type="submit">搜索</button>
     </form>
@@ -128,7 +143,10 @@
                 {label: '视频', value: 'video'},
                 {label: '动漫', value: 'anime'},
                 {label: '软件', value: 'software'},
-                {label: '吃喝玩乐', value: 'other'},
+                {label: '指数', value: 'index'},
+                {label: '壁纸', value: 'picture'},
+                {label: '行业标准', value: 'standards'},
+                {label: '吃喝玩乐', value: 'lifestyle'},
                 {label: '搜索引擎', value: 'search'}
             ],
             searchEngines: {
@@ -141,8 +159,9 @@
                 "programming": [
                     {name: "GitHub", url: "https://github.com/search?q=%s"},
                     {name: "CSDN", url: "https://so.csdn.net/so/search?q=%s"},
-                    {name: "stackoverflow", url: "https://stackoverflow.com/search?q=%s"},
-                    {name: "简书", url: "https://www.jianshu.com/search?q=%s&page=1&type=note"}
+                    {name: "Stackoverflow", url: "https://stackoverflow.com/search?q=%s"},
+                    {name: "简书", url: "https://www.jianshu.com/search?q=%s&page=1&type=note"},
+                    {name: "Maven", url: "https://central.sonatype.com/search?q=%s"}
                 ],
                 "translate": [
                     {name: "谷歌", url: "https://translate.google.com/?sl=auto&tl=en&text=%s&op=translate"},
@@ -161,13 +180,39 @@
                 ],
                 "software": [
                     {name: "APKCombo", url: "https://apkcombo.com/zh/search/%s#gsc.tab=0&gsc.q=123&gsc.sort="},
-                    {name: "Scoop", url: "https://scoop.sh/#/apps?q=%s&o=false"},
-                    {name: "maven", url: "https://central.sonatype.com/search?q=%s"}
+                    {name: "Scoop", url: "https://scoop.sh/#/apps?q=%s&o=false"}
                 ],
-                "other": [
+                "lifestyle": [
                     {name: "大众点评", url: "https://www.dianping.com/search/keyword/4/0_%s"},
                     {name: "小红书", url: "https://www.xiaohongshu.com/search_result?keyword=%s"},
                     {name: "抖音", url: "https://www.douyin.com/search/%s"}
+                ],
+                "index": [
+                    {name: "百度指数", url: "https://index.baidu.com/v2/main/index.html#/trend/%s?words=%s"},
+                    {
+                        name: "巨量算数",
+                        url: "https://trendinsight.oceanengine.com/arithmetic-index/analysis?keyword=%s&appName=aweme"
+                    },
+                    {name: "谷歌趋势", url: "https://trends.google.com/trends/explore?q=%s"},
+                    {name: "360趋势", url: "https://trends.so.com/result?query=%s"},
+                    {name: "艺恩娱数", url: "https://ys.endata.cn/DataMarket/Search?key=%s"}
+                ],
+                "picture": [
+                    {name: "pexels", url: "https://www.pexels.com/search/%s/"},
+                    {name: "wallhere", url: "https://wallhere.com/zh/wallpapers?q=%s"},
+                    {name: "hdqwalls", url: "https://hdqwalls.com/search?q=%s"},
+                    {name: "wallhaven", url: "https://wallhaven.cc/search?q=%s"},
+                    {name: "wallpaperswide", url: "https://wallpaperswide.com/search.html?q=%s"},
+                    {name: "unsplash", url: "https://unsplash.com/s/photos/%s"}
+                ],
+                "standards": [
+                    {name: "全国标准信息公共服务平台", url: "https://std.samr.gov.cn/search/std?q=%s"},
+                    {
+                        name: "食品伙伴网",
+                        url: "http://down.foodmate.net/standard/search.php?corpstandard=2&fields=0&kw=%s"
+                    },
+                    {name: "中国标准服务网", url: "https://www.cssn.net.cn/cssn/list?keyword=%s"},
+                    {name: "标准信息服务网", url: "https://www.sacinfo.cn/s/std?p.p2=%s"}
                 ],
                 "search": [
                     {name: "百度", url: "https://www.baidu.com/s?wd=%s"},
@@ -187,7 +232,7 @@
                 const searchQuery = this.searchQuery;
                 const selectedEngines = this.selectedEngines;
                 selectedEngines.forEach(function (engine) {
-                    window.open(engine.replace("%s", encodeURIComponent(searchQuery)), "_blank");
+                    window.open(engine.replaceAll("%s", encodeURIComponent(searchQuery)), "_blank");
                 });
             },
             getSuggestions() {
@@ -224,7 +269,7 @@
 
     // Callback function for Baidu suggestion API
     window.baidu = {
-        sug: function(data) {
+        sug: function (data) {
             if (data && data.s) {
                 app.$data.suggestions = data.s;
             }

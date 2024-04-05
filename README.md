@@ -1,19 +1,21 @@
 ## 编写html页面
-https://chat.openai.com/share/6fb184b9-b4c3-410e-8ede-1fe4315bdaa1
+1. https://chat.openai.com/share/6fb184b9-b4c3-410e-8ede-1fe4315bdaa1
 
 ## 添加相关的搜索网站
-https://chat.openai.com/share/6c8a2ca9-e1f1-48ec-8986-99c70740ec8b
+1. https://chat.openai.com/share/6c8a2ca9-e1f1-48ec-8986-99c70740ec8b
 
 ## 将网站改用vue
-https://chat.openai.com/share/90136ef3-490d-4f90-802a-a227cf3a4f66
+1. https://chat.openai.com/share/90136ef3-490d-4f90-802a-a227cf3a4f66
 
 ## 添加联想词
-https://chat.openai.com/share/560c5dc7-aa97-49e3-9f02-df73210f1bc8
+1. https://chat.openai.com/share/560c5dc7-aa97-49e3-9f02-df73210f1bc8
 
 ## 优化页面
-https://chat.openai.com/share/0962505f-6f0d-40e5-9f2d-e7fbdc66741d
-https://chat.openai.com/share/f101261d-5259-490b-9cf0-d672c73d2cce
+1. https://chat.openai.com/share/0962505f-6f0d-40e5-9f2d-e7fbdc66741d
+2. https://chat.openai.com/share/f101261d-5259-490b-9cf0-d672c73d2cce
 
+## 补充数据
+1. https://chat.openai.com/share/8f3b724d-d8cc-45f1-af47-a71d9b4f59d6
 
 ## 细分领域
 ### 网盘
