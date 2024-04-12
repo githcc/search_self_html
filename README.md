@@ -48,6 +48,9 @@
 1. 分页功能不可用
 2. 联想词没有显示在页面
 
+## 视频
+1. [b站](https://www.bilibili.com/video/BV1Kp42197Ee/)
+
 ## 参考资料
 1. [chatgpt](https://chat.openai.com)
 2. [图欧学习导航](https://tuostudy.upnb.top/)
