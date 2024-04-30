@@ -7,49 +7,19 @@
 6. [优化页面2](https://githcc.github.io/webpage_self_html/openai/v1/f101261d-5259-490b-9cf0-d672c73d2cce.html)
 7. [补充数据](https://githcc.github.io/webpage_self_html/openai/v1/8f3b724d-d8cc-45f1-af47-a71d9b4f59d6.html)
 
-## 细分领域
-### 网盘
-1. [皮卡搜](https://www.pikaso.top/search/?pan=all&type=folder&q=%s)
-2. [小云搜](https://www.yunso.net/index/user/s?wd=%s)
-3. [兄弟盘](https://xiongdipan.com/search?k=%s)
-
-### 搜索引擎
-1. [百度](https://www.baidu.com/s?wd=%s&pn=%pn)
-2. [必应](https://www.bing.com/search?q=%s&PC=U316&FORM=CHROMN&&first=%first)
-3. [谷歌](https://www.google.com/search?q=%s)
-
-### 翻译
-1. [谷歌](https://translate.google.com/?sl=auto&tl=en&text=%s&op=translate)
-2. [有道](https://www.youdao.com/result?word=%s&lang=en)
-
-### 编程
-1. [github](https://github.com/search?q=%s)
-2. [csdn](https://so.csdn.net/so/search?q=%s)
-
-### 视频
-1. [b站](https://search.bilibili.com/all?keyword=123)
-2. [抖音](https://www.douyin.com/search/%s)
-3. [youtube](https://www.youtube.com/results?search_query=%s)
-4. [小雅](https://119.91.23.137:8080/search?box=%s&url=&type=video)
-
-### 动漫
-1. [包子漫画](https://www.baozimh.com/search?q=%s)
-2. [风车动漫](https://www.dmla5.com/search/-------------.html?wd=%s)
-
-### 软件
-1. [APKCombo](https://apkcombo.com/zh/search/%s#gsc.tab=0&gsc.q=123&gsc.sort=)
-2. [scoop](https://scoop.sh/#/apps?q=%s&o=false)
-3. [maven](https://central.sonatype.com/search?q=%s)
-
 ### 联想词接口
 1. [百度](https://suggestion.baidu.com/su?wd=%s)
 
-## 其它
-1. 分页功能不可用
-2. 联想词没有显示在页面
-
 ## 视频
 1. [b站](https://www.bilibili.com/video/BV1Kp42197Ee/)
+
+## 其它
+1. 对于网站的收纳尽管已经很克制，但也日益庞大
+2. 建议自己部署网站，保留对自己有用的即可
+3. 有特别好用的网站可以提Issues
+4. 后续变现
+   1. 辅助用户选择商品，把产品的维度进行细化，比如说耳机，拆解为品牌，音质，佩戴方式，入耳方式，续航，做工等
+   2. 目标，赚推广的钱
 
 ## 参考资料
 1. [chatgpt](https://chat.openai.com)
